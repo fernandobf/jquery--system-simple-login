@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="format-detection" content="telephone=yes"/>
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<meta http-equiv="Content-Language" content="en-US">
+    <title>Bemobi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        input{-webkit-appearance:none;-moz-appearance:none;appearance:none;}
+    </style>
+</head>
+<body>
+
+    <input type="text" name="username" id="username" class="text" maxlength="30" />
+    <br />
+    <input type="password" name="password" id="password" class="text" maxlength="30" />
+    <br />
+    <input type="submit" name="btnSubmit" id="btnSubmit" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+
+    $(document).ready(function () {
+
+
+
+
+
+
+        $("#btnSubmit").click(function () {
+        //collect userName and password entered by users
+        var userName = $("#username").val();
+        var password = $("#password").val();
+
+        });
+        });
+
+    
+    
+    
+    
+    //authenticate function to make ajax call
+    function authenticate(userName, password) {
+        $.ajax({
+        type: "GET", 
+        url: "login.json",
+        timeout: 3000,
+        datatype: 'JSON',
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        beforeSend: function() {
+            $("h2").html("Carregando..."); //Carregando
+        },
+        error: function() {
+            $("h2").html("O servidor não conseguiu processar o pedido");
+        },
+        success: function(retorno) {
+                // Interpretando retorno JSON...
+                var clientes = retorno;
+
+                // Listando cada cliente encontrado na lista...
+                $.each(clientes,function(i, cliente){
+                    var item = "<li><h2>"+cliente.EMAIL+"</h2><p><b>Fone.:</b> "+cliente.PASS+"</p></li>";
+                    $("#listaClientes").append(item);
+                });
+                    //Limpar Status de Carregando 
+                    $("h2").html("Carregado"); 
+        },
+        data: '{"userName": "' + userName + '", "password" : "' + password + '"}',
+            success: function () {
+                //alert('funcionou');
+            }
+    });    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+    </script>
+</body>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="format-detection" content="telephone=yes"/>
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<meta http-equiv="Content-Language" content="en-US">
+    <title>Bemobi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        input{-webkit-appearance:none;-moz-appearance:none;appearance:none;}
+    </style>
+</head>
+<body onload="carregarItens()">
+    <section>
+        <input type="text" name="username" id="username" class="text" maxlength="30" />
+        <br />
+        <input type="password" name="password" id="password" class="text" maxlength="30" />
+        <br />
+        <input type="submit" name="btnSubmit" id="btnSubmit" />
+        <div class="warning"></div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        function carregarItens(){
+            $.ajax({
+                type: "GET", 
+                url: "login.json",
+                timeout: 3000,
+                datatype: 'JSON',
+                contentType: "application/json; charset=utf-8",
+                cache: false,
+                beforeSend: function(){},
+                error: function() {
+                    $(".warning").html('Houve um erro ao carregar o JSON. :(');
+                },
+                success: function(retorno) {
+                    var clientes = retorno;
+                    $.each(clientes,function(i, cliente){
+                        var login = cliente.EMAIL;
+                        var pass = cliente.PASS;
+
+                        $("#btnSubmit").click(function () {
+                            var userName = $("#username").val();
+                            var userPass = $("#password").val();
+                            
+                            if(userName == login && userPass == pass){
+                                window.location.href = "https://www.globo.com/"
+                            }else if(userName == login && userPass != pass){
+                                $(".warning").html('Senha incorreta');
+                            }else if(userName != login && userPass == pass){
+                                $(".warning").html('Usuário incorreto');
+                            }else if(userName == ''){
+                                $(".warning").html('Digite um usuário');
+                            }else if(userName != login){
+                                $(".warning").html('Usuário não exite');
+                            }
+                        });
+                    });
+                } 
+            });  
+        }    
+    </script>
+</body>

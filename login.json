@@ -1,0 +1,27 @@
+[
+    {
+        "ID": "1",
+        "PASS": "123456",
+        "EMAIL": "diegocavalca.ti@gmail.com"
+    },
+    {
+        "ID": "2",
+        "PASS": "123456",
+        "EMAIL": "luizcarlos@email.com"
+    },
+    {
+        "ID": "3",
+        "PASS": "123456",
+        "EMAIL": "j.fulano@email.com"
+    },
+    {
+        "ID": "4",
+        "PASS": "123456",
+        "EMAIL": "joaodossantos@email.com.br"
+    },
+    {
+        "ID": "5",
+        "PASS": "123456",
+        "EMAIL": "luizcarlos@email.com"
+    }
+]
